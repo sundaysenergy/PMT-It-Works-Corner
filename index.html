@@ -15,12 +15,25 @@
         </h2>
         <div><img src="http://dev.perfectmeasuringtape.com/{{product.field_photo[0].filepath}}" style="max-width:300px; float:left; padding-right: 20px;" /></div>
         <div ng-bind-html-unsafe="product.field_description[0].value"></div>
-        <select ng-repeat="attribute in product.attributes">
-          <option>--{{attribute.name}}--</option>
-          <option value="{{option.oid}}" ng-repeat="option in attribute.options">
-            {{option.name}}
-          </option>
-        </select>
+        <form ng-submit="addCart({{product.nid}}, {{quantity}})">
+          <select ng-repeat="attribute in product.attributes">
+            <option>--{{attribute.name}}--</option>
+            <option value="{{option.oid}}" ng-repeat="option in attribute.options">
+              {{option.name}}
+            </option>
+          </select>
+          <input type="text" ng-model="quantity">
+          <input type="submit">
+        </form>
+      </li>
+    </ul>
+  </div>
+  
+  <div>
+    <h1>IN YOUR CART</h1>
+    <ul>
+      <li ng-repeat="items in cart">
+        Node ID: {{items.nid}} Quantity: {{items.quantity}}
       </li>
     </ul>
   </div>
