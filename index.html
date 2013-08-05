@@ -14,7 +14,7 @@
         <select ng-repeat="attribute in product.attributes">
           <option>{{attribute.name}}</option>
           <option ng-repeat="option in attribute.options">
-            <option>{{option.name}}</option>
+            {{option.name}}
           </option>
         </select>
       </li>
