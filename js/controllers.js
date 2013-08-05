@@ -6,8 +6,13 @@ function PmtProductList($scope, $http) {
   });
 
   $scope.cart = [];
+  $scope.attributes = [];
   
-  $scope.addCart = function(nid,quantity) {
-    $scope.cart.push({'nid':nid, 'quantity':quantity})
+  $scope.addCart = function(nid) {
+    var attr = [];
+    angular.copy($scope.attributes, attr);
+    $scope.cart.push({'nid':nid, 'attributes': attr });
+    $scope.attributes.length = 0;
   }
+  
 }
