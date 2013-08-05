@@ -16,16 +16,14 @@
         <div><img src="http://dev.perfectmeasuringtape.com/{{product.field_photo[0].filepath}}" style="max-width:300px; float:left; padding-right: 20px;" /></div>
         <div ng-bind-html-unsafe="product.field_description[0].value"></div>
         
-        <form ng-submit="addCart({{product.nid}})">
-          <div ng-repeat="attribute in product.attributes">
-            <select ng-model="attributes[$index]">
-              <option>--{{attribute.name}}--</option>
-              <option value="{{option.name}}" ng-repeat="option in attribute.options">
-                {{option.name}}
-              </option>
-            </select>
-          </div>
-          <input type="text" ng-model="purchase.quantity">
+        <form ng-submit="addCart({{product.nid}}, {{quantity}})">
+          <select ng-model="attributes[$index]" ng-repeat="attribute in product.attributes">
+            <option value="" selected>--{{attribute.name}}--</option>
+            <option value="{{option.name}}" ng-repeat="option in attribute.options">
+              {{option.name}}
+            </option>
+          </select>
+          <input type="text" ng-model="quantity">
           <input type="submit">
         </form>
       </li>
@@ -36,7 +34,7 @@
     <h1>IN YOUR CART</h1>
     <ul>
       <li ng-repeat="items in cart">
-        Node ID: {{items.nid}} Attributes: {{items.attributes}}
+        Node ID: {{items.nid}} Attributes: {{items.attributes}} Quantity: {{items.quantity}}
       </li>
     </ul>
   </div>

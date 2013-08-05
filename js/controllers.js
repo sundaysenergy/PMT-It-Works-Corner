@@ -8,10 +8,10 @@ function PmtProductList($scope, $http) {
   $scope.cart = [];
   $scope.attributes = [];
   
-  $scope.addCart = function(nid) {
+  $scope.addCart = function(nid, quantity) {
     var attr = [];
     angular.copy($scope.attributes, attr);
-    $scope.cart.push({'nid':nid, 'attributes': attr });
+    $scope.cart.push({'nid':nid, 'quantity': quantity, 'attributes': attr });
     $scope.attributes.length = 0;
   }
   
