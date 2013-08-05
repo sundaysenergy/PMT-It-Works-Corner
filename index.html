@@ -2,7 +2,7 @@
 <html lang="en" ng-app>
 <head>
   <meta charset="utf-8">
-  <title>My AngularJS App</title>
+  <title>PMT product specials!</title>
   <link rel="stylesheet" href="css/app.css"/>
 </head>
 <body ng-controller="PmtProductList">
@@ -10,10 +10,14 @@
   <div>
     <ul>
       <li ng-repeat="product in products">
-        {{product.title}}
+        <h2>
+          {{product.title}}
+        </h2>
+        <div><img src="http://dev.perfectmeasuringtape.com/{{product.field_photo[0].filepath}}" style="max-width:300px; float:left; padding-right: 20px;" /></div>
+        <div ng-bind-html-unsafe="product.field_description[0].value"></div>
         <select ng-repeat="attribute in product.attributes">
-          <option>{{attribute.name}}</option>
-          <option ng-repeat="option in attribute.options">
+          <option>--{{attribute.name}}--</option>
+          <option value="{{option.oid}}" ng-repeat="option in attribute.options">
             {{option.name}}
           </option>
         </select>
