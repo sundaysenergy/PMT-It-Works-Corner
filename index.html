@@ -20,11 +20,11 @@
       <div class="col-lg-6">
         <div ng-repeat="product in products">
           <h2>
-            {{product.title}}
+            {{product.title}} - ${{product.sell_price}}/unit
           </h2>
           <div><img src="http://dev.perfectmeasuringtape.com/{{product.field_photo[0].filepath}}" class="img-thumbnail" style="max-width: 300px; float: left; margin-right: 20px;" /></div>
           <div ng-bind-html-unsafe="product.field_description[0].value"></div>
-          <form ng-submit="addCart({{product.nid}}, {{quantity}}, '{{product.title}}')" class="form-inline">     
+          <form ng-submit="addCart({{product.nid}}, {{quantity}}, '{{product.title}}', {{product.sell_price}})" class="form-inline">     
             <div ng-repeat="attribute in product.attributes">
               <select class="form-control" ng-options="p.name for p in attribute.options" name="attribute-{{attribute.aid}}" ng-model="attributes[$index]">
                 <option value="">--{{attribute.name}}--</option>
@@ -41,6 +41,7 @@
         <div class="panel" ng-repeat="items in cart">
           <div class="panel-heading">{{items.title}}</div>
           <ul class="product-details">
+            <li><strong>Price:</strong> ${{items.price}}
             <li><strong>Attributes:</strong> <br />
               <span class="label item-attribute" ng-repeat="att in items.attributes">
                 {{att.name}}
@@ -49,7 +50,7 @@
             <li><strong>Quantity:</strong> {{items.quantity}}</li>
           </ul>
           <div class="panel-footer">
-            <form ng-submit="removeItem({{$index}}, {{items.quantity}})">
+            <form ng-submit="removeItem({{$index}}, {{items.quantity}}, {{items.price}})">
               <button type="submit" class="btn btn-danger">
                 Remove
               </button>
@@ -57,6 +58,7 @@
           </div>
         </div>
         <h4>Total Units: <input ng-model="units" class="unit-total" readonly></input></h4>
+        <h4>Total Price: $<input ng-model="dollars" class="unit-total" readonly></input></h4>
       </div>
     </div>
   </div>

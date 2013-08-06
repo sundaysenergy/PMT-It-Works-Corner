@@ -8,17 +8,19 @@ function PmtProductList($scope, $http) {
   $scope.cart = [];
   $scope.attributes = [];
   $scope.units = 0;
-  $scope.dollars = 0;
+  $scope.dollars = 0.00;
   
-  $scope.addCart = function(nid, quantity, title) {
+  $scope.addCart = function(nid, quantity, title, price) {
     var attr = [];
     angular.copy($scope.attributes, attr);
     $scope.units = $scope.units + quantity;
-    $scope.cart.push({'title': title, 'nid':nid, 'quantity': quantity, 'attributes': attr });
+    $scope.dollars = (parseFloat($scope.dollars) + parseFloat((quantity * price))).toFixed(2); 
+    $scope.cart.push({'price': price, 'title': title, 'nid':nid, 'quantity': quantity, 'attributes': attr });
     $scope.attributes.length = 0;
   }
   
-  $scope.removeItem = function(index, quantity) {
+  $scope.removeItem = function(index, quantity, price) {
+    $scope.dollars = (parseFloat($scope.dollars) - parseFloat(quantity * price)).toFixed(2);
     $scope.units = $scope.units - quantity;
     $scope.cart.splice(index, 1);
   }
