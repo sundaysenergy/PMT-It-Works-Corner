@@ -55,9 +55,25 @@ function PmtProductList($scope, $http) {
     $scope.dollars = $scope.totalCart();
   }
 
-/*
-  $scope.recalc = function(select_model) {
+  $scope.proceedCheckout = function() {
+    var cartitems = [];
+    angular.copy($scope.cart, cartitems);
+    var total_items = cartitems.length;
+    var url = '';
     
+    for (var i = 0; i < total_items; i++) {
+      url = url + 'p' + cartitems[i].nid + '_q' + cartitems[i].quantity + '_';
+      var total_attributes = cartitems[i].attributes.length;
+      for (var j = 0; j < total_attributes; j++) {
+        url = url + 'a' + cartitems[i].attributes[j].aid + 'o' + cartitems[i].attributes[j].oid;
+        if (j < (total_attributes -1)) {
+          url = url + '_';
+        }
+      }
+      if (i < (total_items - 1)) {
+        url = url + '-';
+      }
+    }
+    console.log(url);
   }
-*/
 }
