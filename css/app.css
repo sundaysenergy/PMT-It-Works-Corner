@@ -36,9 +36,6 @@ input {
   margin-bottom: 10px;
   max-width: 300px;
 }
-img {
-  max-width: 300px;
-}
 .affix {
   position: fixed;
   top: 0;
@@ -46,4 +43,7 @@ img {
 }
 .unit-total {
   border: 0px;
+}
+.header img {
+  width: 100%;
 }
