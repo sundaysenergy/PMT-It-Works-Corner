@@ -26,7 +26,7 @@
           <div ng-bind-html-unsafe="product.field_description[0].value"></div>
           <form ng-submit="addCart({{product.nid}}, {{quantity}}, '{{product.title}}', {{product.sell_price}})" class="form-inline">     
             <div ng-repeat="attribute in product.attributes">
-              <select class="form-control" ng-options="p.name for p in attribute.options" name="attribute-{{attribute.aid}}" ng-model="attributes[$index]">
+              <select class="form-control" ng-options="p.name+' (+$'+p.price+')' for p in attribute.options" name="attribute-{{attribute.aid}}" ng-model="attributes[$index]">
                 <option value="">--{{attribute.name}}--</option>
               </select>
             </div>
@@ -44,7 +44,7 @@
             <li><strong>Price:</strong> ${{items.price}}
             <li><strong>Attributes:</strong> <br />
               <span class="label item-attribute" ng-repeat="att in items.attributes">
-                {{att.name}}
+                {{att.name}} +${{att.price}}
               </span> 
             </li>
             <li><strong>Quantity:</strong> {{items.quantity}}</li>
