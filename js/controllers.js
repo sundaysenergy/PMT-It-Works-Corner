@@ -26,7 +26,6 @@ function PmtProductList($scope, $http) {
     angular.copy($scope.cart, cartitems);
     var length = cartitems.length;
     var dollars = 0;
-    console.log(cartitems);
     
     for (var i = 0; i < length; i++) {
       var price = cartitems[i].price;
@@ -34,7 +33,9 @@ function PmtProductList($scope, $http) {
       var addons = 0;
       var attribute_length = cartitems[i].attributes.length;
       for (var j = 0; j < attribute_length; j++) {
-        addons = parseFloat(addons) + parseFloat(cartitems[i].attributes[j].price);
+        if (typeof(cartitems[i].attributes[j].price) != null) {
+          addons = parseFloat(addons) + parseFloat(cartitems[i].attributes[j].price);
+        }
       }
       dollars = parseFloat(dollars) + parseFloat((quantity * (price + addons)));
     }
