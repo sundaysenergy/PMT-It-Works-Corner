@@ -24,7 +24,7 @@
           </h2>
           <div><img src="http://dev.perfectmeasuringtape.com/{{product.field_photo[0].filepath}}" class="img-thumbnail" style="max-width: 300px; float: left; margin-right: 20px;" /></div>
           <div ng-bind-html-unsafe="product.field_description[0].value"></div>
-          <form ng-submit="addCart({{product.nid}}, {{quantity}})" class="form-inline">     
+          <form ng-submit="addCart({{product.nid}}, {{quantity}}, '{{product.title}}')" class="form-inline">     
             <div ng-repeat="attribute in product.attributes">
               <select class="form-control" ng-options="p.name for p in attribute.options" name="attribute-{{attribute.aid}}" ng-model="attributes[$index]">
                 <option value="">--{{attribute.name}}--</option>
@@ -38,26 +38,24 @@
 
       <div class="col-lg-4" id="cart">
         <h1>IN YOUR CART</h1>
-        <ul>
-          <li ng-repeat="items in cart">
-            <ul>
-              <li>Node ID: {{items.nid}}</li>
-              <li>Attributes: 
-                <ul ng-repeat="att in items.attributes">
-                  <li>{{att.name}}</li> 
-                </ul> 
-              </li>
-              <li>Quantity: {{items.quantity}}</li>
-              <li>
-                <form ng-submit="removeItem({{$index}}, {{items.quantity}})">
-                  <button type="submit" class="btn btn-danger">
-                    Remove
-                  </button>
-                </form>
-              </li>
-            </ul>
-          </li>
-        </ul>
+        <div class="panel" ng-repeat="items in cart">
+          <div class="panel-heading">{{items.title}}</div>
+          <ul class="product-details">
+            <li><strong>Attributes:</strong> <br />
+              <span class="label item-attribute" ng-repeat="att in items.attributes">
+                {{att.name}}
+              </span> 
+            </li>
+            <li><strong>Quantity:</strong> {{items.quantity}}</li>
+          </ul>
+          <div class="panel-footer">
+            <form ng-submit="removeItem({{$index}}, {{items.quantity}})">
+              <button type="submit" class="btn btn-danger">
+                Remove
+              </button>
+            </form>
+          </div>
+        </div>
         <h4>Total Units: <input ng-model="units" class="unit-total" readonly></input></h4>
       </div>
     </div>

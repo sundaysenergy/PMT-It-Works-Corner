@@ -47,3 +47,10 @@ input {
 .header img {
   width: 100%;
 }
+.product-details {
+  list-style: none;
+  padding-left: 0;
+}
+.item-attribute {
+  margin-right: 5px;
+}
