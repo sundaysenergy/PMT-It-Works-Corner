@@ -40,7 +40,7 @@ function PmtProductList($scope, $http) {
       var addons = 0;
       var attribute_length = cartitems[i].attributes.length;
       for (var j = 0; j < attribute_length; j++) {
-        if (typeof(cartitems[i].attributes[j].price) != null) {
+        if (typeof(cartitems[i].attributes[j]) != 'undefined') {
           addons = parseFloat(addons) + parseFloat(cartitems[i].attributes[j].price);
         }
       }
