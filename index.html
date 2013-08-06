@@ -48,6 +48,13 @@
                 </ul> 
               </li>
               <li>Quantity: {{items.quantity}}</li>
+              <li>
+                <form ng-submit="removeItem({{$index}}, {{items.quantity}})">
+                  <button type="submit" class="btn btn-danger">
+                    Remove
+                  </button>
+                </form>
+              </li>
             </ul>
           </li>
         </ul>

@@ -18,4 +18,8 @@ function PmtProductList($scope, $http) {
     $scope.attributes.length = 0;
   }
   
+  $scope.removeItem = function(index, quantity) {
+    $scope.units = $scope.units - quantity;
+    $scope.cart.splice(index, 1);
+  }
 }
