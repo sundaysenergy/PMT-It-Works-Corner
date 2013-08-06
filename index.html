@@ -16,8 +16,8 @@
             {{product.title}}
           </h2>
           <div><img src="http://dev.perfectmeasuringtape.com/{{product.field_photo[0].filepath}}" class="img-thumbnail" style="max-width: 300px; float: left; margin-right: 20px;" /></div>
-          <div ng-bind-html-unsafe="product.field_description[0].value + product.cost"></div>
-          <form ng-submit="addCart({{product.nid}}, {{quantity}}, {{product.cost}})" class="form-inline">     
+          <div ng-bind-html-unsafe="product.field_description[0].value"></div>
+          <form ng-submit="addCart({{product.nid}}, {{quantity}})" class="form-inline">     
             <div ng-repeat="attribute in product.attributes">
               <select class="form-control" ng-options="p.name for p in attribute.options" name="attribute-{{attribute.aid}}" ng-model="attributes[$index]">
                 <option value="">--{{attribute.name}}--</option>
