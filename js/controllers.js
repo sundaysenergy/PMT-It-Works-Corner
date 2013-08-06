@@ -74,6 +74,6 @@ function PmtProductList($scope, $http) {
         url = url + '-';
       }
     }
-    console.log(url);
+    window.location = 'http://dev.perfectmeasuringtape.com/cart/add/' + url;
   }
 }
