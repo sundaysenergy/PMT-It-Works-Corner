@@ -27,10 +27,10 @@
           <form ng-submit="addCart({{product.nid}}, {{quantity}}, '{{product.title}}', {{product.sell_price}})" class="form-inline">     
             <div ng-repeat="attribute in product.attributes">
               <select class="form-control" ng-options="p.name+' (+$'+p.price+')' for p in attribute.options" name="attribute-{{attribute.aid}}" ng-model="attributes[$index]">
-                <option value="">--{{attribute.name}}--</option>
+                <option value="" style="display:none;">--{{attribute.name}}--</option>
               </select>
             </div>
-            <input class="form-control" type="text" ng-model="quantity" placeholder="Enter Quantity"><br />
+            <input class="form-control" type="number" min="0" ng-model="quantity" placeholder="Enter Quantity"><br />
             <input type="submit" class="btn btn-default">
           </form>
         </div>
@@ -59,6 +59,13 @@
         </div>
         <h4>Total Units: <input ng-model="units" class="unit-total" readonly></input></h4>
         <h4>Total Price: $<input ng-model="dollars" class="unit-total" readonly></input></h4>
+        <div ng-show="validCheckout()">
+          <form ng-submit="proceedCheckout()">
+            <button ng-show="validCheckout()" type="submit" class="btn btn-primary">
+              Checkout
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

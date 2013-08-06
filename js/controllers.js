@@ -2,15 +2,22 @@
 
 function PmtProductList($scope, $http) {
   $http.get('file.json').success(function(data) {
-    $scope.products = data;
+    $scope.products = data.products;
+    $scope.min_products = data.min_qty;
   });
 
   $scope.cart = [];
   $scope.attributes = [];
   $scope.units = 0;
   $scope.dollars = 0.00;
-  
   $scope.configuration = [];
+  
+  $scope.validCheckout = function() {
+    if ($scope.units >= $scope.min_products) {
+      return true;
+    }
+    return false;
+  }
   
   $scope.addCart = function(nid, quantity, title, price) {
     var attr = [];
