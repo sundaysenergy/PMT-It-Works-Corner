@@ -28,3 +28,22 @@
   content: "";
   padding: 0;
 }
+select {
+  margin-bottom: 10px;
+  max-width: 300px;
+}
+input {
+  margin-bottom: 10px;
+  max-width: 300px;
+}
+img {
+  max-width: 300px;
+}
+.affix {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+.unit-total {
+  border: 0px;
+}
