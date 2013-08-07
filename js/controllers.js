@@ -10,8 +10,15 @@ function PmtProductList($scope, $http) {
   $scope.attributes = [];
   $scope.units = 0;
   $scope.dollars = 0.00;
-  $scope.configuration = [];
-  
+  $scope.configuration = [];  
+
+  $scope.hideSelect = function(aid) {
+    if (aid ==1) {
+      return true;
+    }
+    return false;
+  }
+
   $scope.validCheckout = function() {
     if ($scope.units >= $scope.min_products) {
       return true;
@@ -19,10 +26,26 @@ function PmtProductList($scope, $http) {
     return false;
   }
   
-  $scope.addCart = function(nid, quantity, title, price) {
+  $scope.addCart = function(nid, quantity, title, price, product) {
     var attr = [];
     var addons = 0;
+    if (typeof($scope.attributes[0]) == 'undefined') {
+      length = product.attributes[0].options.length;
+      for (var i = 0; i < length; i++) {
+        if (parseInt(product.attributes[0].options[i].oid) == '2') {
+          $scope.attributes[0] = product.attributes[0].options[i];
+        }
+      }
+    } else {
+      length = product.attributes[1].options.length;
+      for (var i = 0; i < length; i++) {
+        if (parseInt(product.attributes[1].options[i].oid) == '2') {
+          $scope.attributes[1] = product.attributes[1].options[i];
+        }
+      }
+    }
     angular.copy($scope.attributes, attr);
+    console.log(attr);
     $scope.units = $scope.units + quantity;
     var attribute_length = attr.length;
     for (var j = 0; j < attribute_length; j++) {
@@ -87,7 +110,6 @@ function PmtProductList($scope, $http) {
         url = url + '-';
       }
     }
-    //console.log('http://dev.perfectmeasuringtape.com/cart/add/' + url + '?destination=node/add/order-custom' + encodeURIComponent(query));
     window.location = 'http://dev.perfectmeasuringtape.com/cart/add/' + url + '?destination=node/add/order-custom' + encodeURIComponent(query);
   }
 }

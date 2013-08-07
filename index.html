@@ -18,10 +18,10 @@
           </h2>
           <div><img src="http://dev.perfectmeasuringtape.com/{{product.field_photo[0].filepath}}" class="img-thumbnail" style="max-width: 300px; float: left; margin-right: 20px;" /></div>
           <div ng-bind-html-unsafe="product.field_description[0].value"></div>
-          <form ng-submit="addCart({{product.nid}}, {{quantity}}, '{{product.title}}', {{product.sell_price}})" class="form-inline">     
+          <form ng-submit="addCart({{product.nid}}, {{quantity}}, '{{product.title}}', {{product.sell_price}}, {{product}})" class="form-inline">     
             <div ng-repeat="attribute in product.attributes">
-              <select class="form-control" ng-options="p.name+' (+$'+p.price+')' for p in attribute.options" name="attribute-{{attribute.aid}}" ng-model="attributes[$index]">
-                <option value="" style="display:none;">--{{attribute.name}}--</option>
+              <select class="form-control" ng-hide="hideSelect(attribute.aid)" ng-options="p.name+' (+$'+p.price+')' for p in attribute.options" name="attribute-{{attribute.aid}}" ng-model="attributes[$index]">
+                <option value="">--{{attribute.name}}--</option>
               </select>
             </div>
             <input class="form-control" type="number" min="0" ng-model="quantity" placeholder="Enter Quantity"><br />
