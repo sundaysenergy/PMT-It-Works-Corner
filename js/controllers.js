@@ -63,6 +63,7 @@ function PmtProductList($scope, $http) {
     $scope.cart.push({'adjusted_price': (parseFloat(price) + parseFloat(addons)), 'price': price, 'title': title, 'nid':nid, 'quantity': quantity, 'attributes': attr });
     $scope.dollars = $scope.totalCart();
     $scope.attributes.length = 0;
+    alertify.log("Your item has been added to the cart");
   }
   
   $scope.totalCart = function() {
