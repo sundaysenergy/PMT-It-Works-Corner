@@ -21,9 +21,16 @@ function PmtProductList($scope, $http) {
   
   $scope.addCart = function(nid, quantity, title, price) {
     var attr = [];
+    var addons = 0;
     angular.copy($scope.attributes, attr);
     $scope.units = $scope.units + quantity;
-    $scope.cart.push({'price': price, 'title': title, 'nid':nid, 'quantity': quantity, 'attributes': attr });
+    var attribute_length = attr.length;
+    for (var j = 0; j < attribute_length; j++) {
+      if (typeof(attr[j]) != 'undefined') {
+        addons = parseFloat(addons) + parseFloat(attr[j].price);
+      }
+    }
+    $scope.cart.push({'adjusted_price': (parseFloat(price) + parseFloat(addons)), 'price': price, 'title': title, 'nid':nid, 'quantity': quantity, 'attributes': attr });
     $scope.dollars = $scope.totalCart();
     $scope.attributes.length = 0;
   }
@@ -35,21 +42,14 @@ function PmtProductList($scope, $http) {
     var dollars = 0;
     
     for (var i = 0; i < length; i++) {
-      var price = cartitems[i].price;
+      var adjusted_price = cartitems[i].adjusted_price;
       var quantity = cartitems[i].quantity;
-      var addons = 0;
-      var attribute_length = cartitems[i].attributes.length;
-      for (var j = 0; j < attribute_length; j++) {
-        if (typeof(cartitems[i].attributes[j]) != 'undefined') {
-          addons = parseFloat(addons) + parseFloat(cartitems[i].attributes[j].price);
-        }
-      }
-      dollars = parseFloat(dollars) + parseFloat((quantity * (price + addons)));
+      dollars = parseFloat(dollars) + parseFloat(quantity * adjusted_price);
     }
     return dollars.toFixed(2);
   }
   
-  $scope.removeItem = function(index, quantity, price) {
+  $scope.removeItem = function(index, quantity) {
     $scope.units = $scope.units - quantity;
     $scope.cart.splice(index, 1);
     $scope.dollars = $scope.totalCart();

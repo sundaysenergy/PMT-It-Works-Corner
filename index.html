@@ -20,13 +20,13 @@
       <div class="col-lg-6">
         <div ng-repeat="product in products">
           <h2>
-            {{product.title}} - ${{product.sell_price}}/unit
+            {{product.title}} - {{product.sell_price | currency}}/unit
           </h2>
           <div><img src="http://dev.perfectmeasuringtape.com/{{product.field_photo[0].filepath}}" class="img-thumbnail" style="max-width: 300px; float: left; margin-right: 20px;" /></div>
           <div ng-bind-html-unsafe="product.field_description[0].value"></div>
           <form ng-submit="addCart({{product.nid}}, {{quantity}}, '{{product.title}}', {{product.sell_price}})" class="form-inline">     
             <div ng-repeat="attribute in product.attributes">
-              <select class="form-control" ng-options="p.name+' (+$'+p.price+')' for p in attribute.options" name="attribute-{{attribute.aid}}" ng-model="attributes[$index]">
+              <select class="form-control" ng-options="p.name+' (+$'+p.price|currency+')' for p in attribute.options" name="attribute-{{attribute.aid}}" ng-model="attributes[$index]">
                 <option value="" style="display:none;">--{{attribute.name}}--</option>
               </select>
             </div>
@@ -41,16 +41,16 @@
         <div class="panel" ng-repeat="items in cart">
           <div class="panel-heading">{{items.title}}</div>
           <ul class="product-details">
-            <li><strong>Price:</strong> ${{items.price}}
+            <li><strong>Price:</strong> ${{items.adjusted_price}}
             <li><strong>Attributes:</strong> <br />
               <span class="label item-attribute" ng-repeat="att in items.attributes">
-                {{att.name}} +${{att.price}}
+                {{att.name}}
               </span> 
             </li>
             <li><strong>Quantity:</strong> {{items.quantity}}</li>
           </ul>
           <div class="panel-footer">
-            <form ng-submit="removeItem({{$index}}, {{items.quantity}}, {{items.price}})">
+            <form ng-submit="removeItem({{$index}}, {{items.quantity}})">
               <button type="submit" class="btn btn-danger">
                 Remove
               </button>
