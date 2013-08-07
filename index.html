@@ -12,13 +12,12 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-lg-1"></div>
-      <div class="col-lg-6">
+      <div class="col-lg-6 col-sm-6">
         <div ng-repeat="product in products">
           <h2>
             {{product.title}} - {{product.sell_price | currency}}/unit
           </h2>
-          <div><img src="http://dev.perfectmeasuringtape.com/{{product.field_photo[0].filepath}}" class="img-thumbnail" style="max-width: 300px; float: left; margin-right: 20px;" /></div>
+          <div><img src="http://dev.perfectmeasuringtape.com/{{product.field_photo[0].filepath}}" class="img-thumbnail" style="max-width: 300px; float: none;" /></div>
           <div ng-bind-html-unsafe="product.field_description[0].value"></div>
           <form ng-submit="addCart({{product.nid}}, {{quantity}}, '{{product.title}}', {{product.sell_price}}, {{product}})" class="form-inline">     
             <div ng-repeat="attribute in product.attributes">
@@ -35,7 +34,7 @@
         </div>
       </div>
 
-      <div class="col-lg-4" id="cart">
+      <div class="col-lg-4 col-sm-6" id="cart">
         <h1>IN YOUR CART</h1>
         <div class="panel" ng-repeat="items in cart">
           <div class="panel-heading">{{items.title}}</div>
