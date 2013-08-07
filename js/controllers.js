@@ -12,8 +12,14 @@ function PmtProductList($scope, $http) {
   $scope.dollars = 0.00;
   $scope.configuration = [];  
 
+  $scope.hideOption = function(oid) {
+    if (oid == 2) {
+      return true;
+    }
+    return false;
+  }
   $scope.hideSelect = function(aid) {
-    if (aid ==1) {
+    if (aid == 1) {
       return true;
     }
     return false;

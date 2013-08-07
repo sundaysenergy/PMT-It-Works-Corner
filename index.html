@@ -23,6 +23,9 @@
               <select class="form-control" ng-hide="hideSelect(attribute.aid)" ng-options="p.name+' (+$'+p.price+')' for p in attribute.options" name="attribute-{{attribute.aid}}" ng-model="attributes[$index]">
                 <option value="">--{{attribute.name}}--</option>
               </select>
+              <div ng-show="hideSelect(attribute.aid)" ng-repeat="opt in attribute.options">
+                <select class="form-control" ng-show="hideOption(opt.oid)"><option>{{opt.name}} +{{opt.price | currency}}</option></select>
+              </div>
             </div>
             <input class="form-control" type="number" min="0" ng-model="quantity" placeholder="Enter Quantity"><br />
             <input type="submit" class="btn btn-default">
