@@ -54,3 +54,7 @@ input {
 .item-attribute {
   margin-right: 5px;
 }
+.min_products {
+  background-color: transparent;
+  float: left;
+}

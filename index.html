@@ -57,8 +57,11 @@
             </form>
           </div>
         </div>
-        <h4>Total Units: <input ng-model="units" class="unit-total" readonly></input></h4>
-        <h4>Total Price: $<input ng-model="dollars" class="unit-total" readonly></input></h4>
+        <div ng-hide="validCheckout()" class="alert alert-danger">
+          <strong>Warning!</strong> Minimum order is <span>{{min_products}}</span> units.
+        </div>
+        <h4>Total Units: <input ng-model="units" class="unit-total" readonly /></h4>
+        <h4>Total Price: $<input ng-model="dollars" class="unit-total" readonly /></h4>
         <div ng-show="validCheckout()">
           <form ng-submit="proceedCheckout()">
             <button ng-show="validCheckout()" type="submit" class="btn btn-primary">
