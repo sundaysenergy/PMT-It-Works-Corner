@@ -12,7 +12,7 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-lg-6 col-sm-6">
+      <div class="col-lg-6 col-sm-8">
         <div ng-repeat="product in products">
           <h2>
             {{product.title}} - {{product.sell_price | currency}}/unit
@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <div class="col-lg-4 col-sm-6" id="cart">
+      <div class="col-lg-4 col-sm-3" id="cart">
         <h1>IN YOUR CART</h1>
         <div class="panel" ng-repeat="items in cart">
           <div class="panel-heading">{{items.title}}</div>
@@ -43,7 +43,7 @@
             <li><strong>Attributes:</strong> <br />
               <span class="label item-attribute" ng-repeat="att in items.attributes">
                 {{att.name}}
-              </span> 
+              </span><br />
             </li>
             <li><strong>Quantity:</strong> {{items.quantity}}</li>
           </ul>
