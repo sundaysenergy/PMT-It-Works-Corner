@@ -132,6 +132,6 @@ function PmtProductList($scope, $http) {
         url = url + '-';
       }
     }
-    window.location = $scope.site_url + 'cart/add/' + url + '?destination=node/add/order-custom' + encodeURIComponent(query);
+    window.top.location.href = $scope.site_url + 'cart/add/' + url + '?destination=node/add/order-custom' + encodeURIComponent(query);
   }
 }
