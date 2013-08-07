@@ -10,9 +10,9 @@
 </head>
 <body ng-controller="PmtProductList">
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-6 col-sm-8">
+      <div class="col-lg-8 col-sm-8">
         <div ng-repeat="product in products">
           <h2>
             {{product.title}} - {{product.sell_price | currency}}/unit
@@ -29,7 +29,7 @@
               </div>
             </div>
             <input class="form-control" type="number" min="0" ng-model="quantity" placeholder="Enter Quantity"><br />
-            <input type="submit" class="btn btn-default" value="Add to Cart">
+            <input type="submit" class="btn btn-default" value="Add to cart">
           </form>
         </div>
       </div>
@@ -80,5 +80,8 @@
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
   <script src="js/alertify.js"></script>
+  <script>
+    $('#cart').affix();
+  </script>
 </body>
 </html>
