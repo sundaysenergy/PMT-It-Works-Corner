@@ -87,7 +87,7 @@ function PmtProductList($scope, $http) {
         url = url + '-';
       }
     }
-    //console.log('http://dev.perfectmeasuringtape.com/cart/add/' + url + '?destination=' + encodeURIComponent('node/add/order-custom?' + query));
-    window.location = 'http://dev.perfectmeasuringtape.com/cart/add/' + url + '?destination=' + encodeURIComponent('node/add/order-custom?' + query);
+    //console.log('http://dev.perfectmeasuringtape.com/cart/add/' + url + '?destination=node/add/order-custom' + encodeURIComponent(query));
+    window.location = 'http://dev.perfectmeasuringtape.com/cart/add/' + url + '?destination=node/add/order-custom' + encodeURIComponent(query);
   }
 }
