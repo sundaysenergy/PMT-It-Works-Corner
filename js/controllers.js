@@ -1,7 +1,7 @@
 'use strict';
 
 function PmtProductList($scope, $http) {
-  $http.get('http://dev.perfectmeasuringtape.com/service/it_works/json').success(function(data) {
+  $http.get('file.json').success(function(data) {
     $scope.products = data.products;
     $scope.min_products = data.min_qty;
     $scope.site_url = data.url;
@@ -36,18 +36,32 @@ function PmtProductList($scope, $http) {
   $scope.addCart = function(nid, quantity, title, price, product) {
     var attr = [];
     var addons = 0;
-    if (typeof($scope.attributes[0]) == 'undefined') {
-      length = product.attributes[0].options.length;
-      for (var i = 0; i < length; i++) {
-        if (parseInt(product.attributes[0].options[i].oid) == '2') {
-          $scope.attributes[0] = product.attributes[0].options[i];
+    if ($scope.attributes.length == 0) {
+      var attribute_length = product.attributes.length;
+      for (var k = 0; k < attribute_length; k++) {
+        if (parseInt(product.attributes[k].aid) == 1) {
+          length = product.attributes[k].options.length;
+          for (var i = 0; i < length; i++) {
+            if (parseInt(product.attributes[k].options[i].oid) == '2') {
+              $scope.attributes[0] = product.attributes[k].options[i];
+            }
+          }
         }
       }
     } else {
-      length = product.attributes[1].options.length;
-      for (var i = 0; i < length; i++) {
-        if (parseInt(product.attributes[1].options[i].oid) == '2') {
-          $scope.attributes[1] = product.attributes[1].options[i];
+      if (typeof($scope.attributes[0]) == 'undefined') {
+        length = product.attributes[0].options.length;
+        for (var i = 0; i < length; i++) {
+          if (parseInt(product.attributes[0].options[i].oid) == '2') {
+            $scope.attributes[0] = product.attributes[0].options[i];
+          }
+        }
+      } else {
+        length = product.attributes[1].options.length;
+        for (var i = 0; i < length; i++) {
+          if (parseInt(product.attributes[1].options[i].oid) == '2') {
+            $scope.attributes[1] = product.attributes[1].options[i];
+          }
         }
       }
     }
