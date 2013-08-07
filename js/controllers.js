@@ -4,6 +4,7 @@ function PmtProductList($scope, $http) {
   $http.get('http://dev.perfectmeasuringtape.com/service/it_works/json').success(function(data) {
     $scope.products = data.products;
     $scope.min_products = data.min_qty;
+    $scope.site_url = data.url;
   });
 
   $scope.cart = [];
@@ -116,6 +117,6 @@ function PmtProductList($scope, $http) {
         url = url + '-';
       }
     }
-    window.location = 'http://dev.perfectmeasuringtape.com/cart/add/' + url + '?destination=node/add/order-custom' + encodeURIComponent(query);
+    window.location = $scope.site_url + 'cart/add/' + url + '?destination=node/add/order-custom' + encodeURIComponent(query);
   }
 }
