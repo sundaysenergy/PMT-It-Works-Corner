@@ -1,7 +1,7 @@
 'use strict';
 
 function PmtProductList($scope, $http) {
-  $http.get('file.json').success(function(data) {
+  $http.get('http://dev.perfectmeasuringtape.com/service/it_works/json').success(function(data) {
     $scope.products = data.products;
     $scope.min_products = data.min_qty;
   });
