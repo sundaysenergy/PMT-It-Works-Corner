@@ -41,9 +41,9 @@
           <ul class="product-details">
             <li><strong>Price:</strong> ${{items.adjusted_price}}
             <li><strong>Attributes:</strong> <br />
-              <span class="label item-attribute" ng-repeat="att in items.attributes">
+              <div class="label item-attribute" ng-repeat="att in items.attributes">
                 {{att.name}}
-              </span><br />
+              </div>
             </li>
             <li><strong>Quantity:</strong> {{items.quantity}}</li>
           </ul>
