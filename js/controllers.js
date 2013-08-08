@@ -38,6 +38,13 @@ function PmtProductList($scope, $http) {
   $scope.addCart = function(nid, quantity, title, price, product) {
     var attr = [];
     var addons = 0;
+    var length = $scope.attributes.length;
+    
+    for (var i = 0; i < length; i++) {
+      if (typeof($scope.attributes[i]) == 'undefined') {
+        $scope.attributes.splice(i, 1);
+      }
+    }
 /*
     if ($scope.attributes.length == 0) {
       var attribute_length = product.attributes.length;
