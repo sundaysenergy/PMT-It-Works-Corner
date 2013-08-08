@@ -13,6 +13,7 @@ function PmtProductList($scope, $http) {
   $scope.dollars = 0.00;
   $scope.configuration = [];  
 
+/*
   $scope.hideOption = function(oid) {
     if (oid == 2) {
       return true;
@@ -25,6 +26,7 @@ function PmtProductList($scope, $http) {
     }
     return false;
   }
+*/
 
   $scope.validCheckout = function() {
     if ($scope.units >= $scope.min_products) {
@@ -36,6 +38,7 @@ function PmtProductList($scope, $http) {
   $scope.addCart = function(nid, quantity, title, price, product) {
     var attr = [];
     var addons = 0;
+/*
     if ($scope.attributes.length == 0) {
       var attribute_length = product.attributes.length;
       for (var k = 0; k < attribute_length; k++) {
@@ -65,8 +68,8 @@ function PmtProductList($scope, $http) {
         }
       }
     }
+*/
     angular.copy($scope.attributes, attr);
-    console.log(attr);
     $scope.units = $scope.units + quantity;
     var attribute_length = attr.length;
     for (var j = 0; j < attribute_length; j++) {
