@@ -149,6 +149,12 @@ function PmtProductList($scope, $http) {
         url = url + '-';
       }
     }
-    window.top.location.href = $scope.site_url + 'cart/add/' + url + '?destination=node/add/order-custom' + encodeURIComponent(query);
+    if (url.match(/.*a1o2.*/g)) {
+      window.top.location.href = $scope.site_url + 'cart/add/' + url + '?destination=node/add/order-custom' + encodeURIComponent(query);
+      //console.log($scope.site_url + 'cart/add/' + url + '?destination=node/add/order-custom' + encodeURIComponent(query));
+    } else {
+      window.top.location.href = $scope.site_url + 'cart/add/' + url;
+      //console.log($scope.site_url + 'cart/add/' + url);
+    } 
   }
 }
