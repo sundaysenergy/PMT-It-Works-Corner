@@ -153,7 +153,7 @@ function PmtProductList($scope, $http) {
       window.top.location.href = $scope.site_url + 'cart/add/' + url + '?destination=node/add/order-custom' + encodeURIComponent(query);
       //console.log($scope.site_url + 'cart/add/' + url + '?destination=node/add/order-custom' + encodeURIComponent(query));
     } else {
-      window.top.location.href = $scope.site_url + 'cart/add/' + url;
+      window.top.location.href = $scope.site_url + 'cart/add/' + url + '?destination=cart';
       //console.log($scope.site_url + 'cart/add/' + url);
     } 
   }
