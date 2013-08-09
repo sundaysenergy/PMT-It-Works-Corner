@@ -28,7 +28,7 @@
           <h2>
             {{product.title}} - {{product.sell_price | currency}}/unit
           </h2>
-          <div><img src="http://dev.perfectmeasuringtape.com/{{product.field_photo[0].filepath}}" class="img-thumbnail" style="max-width: 300px; float: none;" /></div>
+          <div><img src="{{url}}{{product.field_photo[0].filepath}}" class="img-thumbnail" style="max-width: 300px; float: none;" /></div>
           <div ng-bind-html-unsafe="product.field_description[0].value"></div>
           <form ng-submit="addCart({{product.nid}}, {{quantity}}, '{{product.title}}', {{product.sell_price}}, {{product}})" class="form-inline">     
             <div ng-repeat="attribute in product.attributes">
