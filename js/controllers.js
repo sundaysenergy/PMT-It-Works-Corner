@@ -19,6 +19,7 @@ function PmtProductList($scope, $http) {
   $scope.units = 0;
   $scope.dollars = 0.00;
   $scope.configuration = [];  
+  $scope.expanded = [];
 
 /*
   $scope.hideOption = function(oid) {
@@ -34,6 +35,21 @@ function PmtProductList($scope, $http) {
     return false;
   }
 */
+
+  $scope.itemExpand = function(index) {
+    var length = $scope.expanded.length;
+    for (var i = 0; i < length; i++) {
+      if (index != i) {
+        $scope.expanded[i] = false;
+      }
+    }
+    if ($scope.expanded[index] == false) {
+      $scope.expanded[index] = true;
+    } else {
+      $scope.expanded[index] = false;
+    }
+    return true;
+  }
 
   $scope.validCheckout = function() {
     if ($scope.units >= $scope.min_products) {

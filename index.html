@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/app.css"/>
   <link rel="stylesheet" href="css/alertify.core.css"/>
   <link rel="stylesheet" href="css/alertify.default.css"/>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css"/>
 </head>
 <body ng-controller="PmtProductList">
 
@@ -27,9 +28,9 @@
         <div class="accordion" id="accordion_products">
           <div class="accordion-group" ng-repeat="product in products">
             <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_products" href="#collapse{{$index}}">
+              <a class="accordion-toggle" ng-click="itemExpand($index)" ng-init="expanded[$index] = false" data-toggle="collapse" data-parent="#accordion_products" href="#collapse{{$index}}">
                 <h4>
-                  {{product.title}} - {{product.sell_price | currency}}/unit
+                  <i ng-show="expanded[$index]" class="icon-minus-sign"></i> <i ng-hide="expanded[$index]" class="icon-plus-sign"></i> {{product.title}} - {{product.sell_price | currency}}/unit
                 </h4>
               </a>
             </div>
