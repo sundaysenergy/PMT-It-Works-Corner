@@ -1,5 +1,12 @@
 'use strict';
 
+angular.module('Pmt', []).
+filter('escapestring', function() {
+    return function(input) {
+      return input.replace("'", "\\\'");
+    }
+});
+
 function PmtProductList($scope, $http) {
   $http.get('/service/it_works/json').success(function(data) {
     $scope.products = data.products;
@@ -35,7 +42,7 @@ function PmtProductList($scope, $http) {
     return false;
   }
   
-  $scope.addCart = function(nid, quantity, title, price, product) {
+  $scope.addCart = function(nid, quantity, title, price) {
     var attr = [];
     var addons = 0;
     var length = $scope.attributes.length;
