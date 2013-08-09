@@ -23,32 +23,44 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-8 col-sm-8">
-        <div ng-repeat="product in products">
-          <h2>
-            {{product.title}} - {{product.sell_price | currency}}/unit
-          </h2>
-          <div><img src="{{url}}{{product.field_photo[0].filepath}}" class="img-thumbnail" style="max-width: 300px; float: none;" /></div>
-          <div ng-bind-html-unsafe="product.field_description[0].value"></div>
-          <form ng-submit="addCart({{product.nid}}, {{quantity}}, '{{product.title | escapestring}}', '{{product.sell_price}}')" class="form-inline">     
-            <div ng-repeat="attribute in product.attributes">
-              <select class="form-control" ng-options="p.name+' (+$'+p.price+')' for p in attribute.options" name="attribute-{{attribute.aid}}" ng-model="attributes[$index]">
-                <option value="">--{{attribute.name}}--</option>
-              </select>
+      <div class="col-lg-6 col-sm-6">
+        <div class="accordion" id="accordion_products">
+          <div class="accordion-group" ng-repeat="product in products">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_products" href="#collapse{{$index}}">
+                <h4>
+                  {{product.title}} - {{product.sell_price | currency}}/unit
+                </h4>
+              </a>
+            </div>
+            <div class="accordion-body collapse" id="collapse{{$index}}">
+              <div class="accordion-inner">
+                <div>
+                  <img src="{{url}}{{product.field_photo[0].filepath}}" class="img-thumbnail img-responsive" />
+                </div>
+                <div ng-bind-html-unsafe="product.field_description[0].value"></div>
+                <form ng-submit="addCart({{product.nid}}, {{quantity}}, '{{product.title | escapestring}}', '{{product.sell_price}}')" class="form-inline">     
+                  <div ng-repeat="attribute in product.attributes">
+                    <select class="form-control" ng-options="p.name+' (+$'+p.price+')' for p in attribute.options" name="attribute-{{attribute.aid}}" ng-model="attributes[$index]">
+                      <option value="">--{{attribute.name}}--</option>
+                    </select>
 <!--
               <div ng-show="hideSelect(attribute.aid)" ng-repeat="opt in attribute.options">
                 <select class="form-control" ng-show="hideOption(opt.oid)"><option>{{opt.name}} +{{opt.price | currency}}</option></select>
               </div>
 -->
+                  </div>
+                  <input class="form-control" type="number" min="0" ng-model="quantity" placeholder="Enter Quantity"><br />
+                  <input type="submit" class="btn btn-default" value="Add to cart">
+                </form>
+              </div>
             </div>
-            <input class="form-control" type="number" min="0" ng-model="quantity" placeholder="Enter Quantity"><br />
-            <input type="submit" class="btn btn-default" value="Add to cart">
-          </form>
+          </div>
         </div>
       </div>
 
       <div class="col-lg-4 col-sm-4" id="cart">
-        <h2>CART</h2>
+        <h2 style="margin-top:0">CART</h2>
         <div class="panel" ng-repeat="items in cart">
           <div class="panel-heading">{{items.title}}</div>
           <ul class="product-details">
@@ -82,6 +94,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
