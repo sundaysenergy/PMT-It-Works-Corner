@@ -59,6 +59,9 @@ function PmtProductList($scope, $http) {
   }
   
   $scope.addCart = function(nid, quantity, title, price) {
+    if ((quantity / 10) != parseInt(quantity / 10) || (parseInt(quantity) < 1)) {
+      return false;
+    };
     var attr = [];
     var addons = 0;
     var length = $scope.attributes.length;
