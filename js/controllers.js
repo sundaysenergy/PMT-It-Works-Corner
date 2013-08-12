@@ -113,6 +113,19 @@ function PmtProductList($scope, $http) {
     alertify.log("Your item has been added to the cart");
   }
   
+  $scope.multipleOften = function(quantity ) {
+    if (parseInt(quantity) == 0) {
+      return false;
+    }
+    if (typeof(quantity) == 'undefined') {
+      return true;
+    }
+    if ((quantity / 10) == parseInt(quantity / 10)) {
+      return true;
+    }
+    return false;
+  }
+  
   $scope.totalCart = function() {
     var cartitems = [];
     angular.copy($scope.cart, cartitems);
