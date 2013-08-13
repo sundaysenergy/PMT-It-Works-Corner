@@ -145,6 +145,7 @@ function PmtProductList($scope, $http) {
     $scope.contains_custom = false;
     
     for (var i = 0; i < length; i++) {
+      console.log(cartitems[i]);
       var adjusted_price = cartitems[i].adjusted_price;
       var quantity = cartitems[i].quantity;
       if (cartitems[i].custom) {
