@@ -12,6 +12,7 @@ function PmtProductList($scope, $http) {
     $scope.products = data.products;
     $scope.min_products = data.min_qty;
     $scope.site_url = data.url;
+    $scope.min_dollars = data.min_dollars;
   });
 
   $scope.cart = [];
@@ -20,6 +21,7 @@ function PmtProductList($scope, $http) {
   $scope.dollars = 0.00;
   $scope.configuration = [];  
   $scope.expanded = [];
+  $scope.contains_custom = false;
 
 /*
   $scope.hideOption = function(oid) {
@@ -52,7 +54,7 @@ function PmtProductList($scope, $http) {
   }
 
   $scope.validCheckout = function() {
-    if ($scope.units >= $scope.min_products) {
+    if ((true == $scope.contains_custom && $scope.units >= $scope.min_products) || (false == $scope.contains_custom && $scope.min_dollars <= $scope.dollars)) {
       return true;
     }
     return false;
@@ -113,6 +115,9 @@ function PmtProductList($scope, $http) {
     $scope.cart.push({'adjusted_price': (parseFloat(price) + parseFloat(addons)), 'price': price, 'title': title, 'nid':nid, 'quantity': quantity, 'attributes': attr });
     $scope.dollars = $scope.totalCart();
     $scope.attributes.length = 0;
+
+    //@TODO add a check if the attribute is custom. If so change $scope.constains_custom = true;
+
     alertify.log("Your item has been added to the cart");
   }
   
