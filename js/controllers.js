@@ -54,7 +54,8 @@ function PmtProductList($scope, $http) {
   }
 
   $scope.validCheckout = function() {
-    if ((true == $scope.contains_custom && $scope.units >= $scope.min_products) || (false == $scope.contains_custom && $scope.min_dollars <= $scope.dollars)) {
+    if ((true == $scope.contains_custom && $scope.units >= $scope.min_products) || 
+        (false == $scope.contains_custom && $scope.min_dollars <= $scope.dollars)) {
       return true;
     }
     return false;
@@ -107,16 +108,18 @@ function PmtProductList($scope, $http) {
     angular.copy($scope.attributes, attr);
     $scope.units = $scope.units + quantity;
     var attribute_length = attr.length;
+    var is_custom = false;
     for (var j = 0; j < attribute_length; j++) {
       if (typeof(attr[j]) != 'undefined') {
         addons = parseFloat(addons) + parseFloat(attr[j].price);
+        if ((parseInt(attr[j].aid) == 1) && (parseInt(attr[j].oid) == 2)) {
+          is_custom = true;
+        }
       }
     }
-    $scope.cart.push({'adjusted_price': (parseFloat(price) + parseFloat(addons)), 'price': price, 'title': title, 'nid':nid, 'quantity': quantity, 'attributes': attr });
+    $scope.cart.push({'adjusted_price': (parseFloat(price) + parseFloat(addons)), 'price': price, 'title': title, 'nid':nid, 'quantity': quantity, 'attributes': attr, 'custom': is_custom });
     $scope.dollars = $scope.totalCart();
     $scope.attributes.length = 0;
-
-    //@TODO add a check if the attribute is custom. If so change $scope.constains_custom = true;
 
     alertify.log("Your item has been added to the cart");
   }
@@ -139,10 +142,14 @@ function PmtProductList($scope, $http) {
     angular.copy($scope.cart, cartitems);
     var length = cartitems.length;
     var dollars = 0;
+    $scope.contains_custom = false;
     
     for (var i = 0; i < length; i++) {
       var adjusted_price = cartitems[i].adjusted_price;
       var quantity = cartitems[i].quantity;
+      if (cartitems[i].custom) {
+        $scope.contains_custom = true;
+      }
       dollars = parseFloat(dollars) + parseFloat(quantity * adjusted_price);
     }
     return dollars.toFixed(2);
