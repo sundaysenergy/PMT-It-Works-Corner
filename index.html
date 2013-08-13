@@ -28,8 +28,8 @@
         <div class="accordion" id="accordion_products">
           <div class="accordion-group" ng-repeat="product in products">
             <div class="accordion-heading">
-              <a class="accordion-toggle" ng-click="itemExpand($index)" ng-init="expanded[$index] = false" data-toggle="collapse" data-parent="#accordion_products" href="#collapse{{$index}}">
-                <img src="{{url}}{{product.field_photo[0].filepath_thumb}}" class="img-thumbnail img-responsive" />
+              <a class="accordion-toggle" ng-click="itemExpand($index)" ng-init="expanded[$index] = false" data-toggle="collapse" data-parent="#accordion_products" href="#collapse{{$index}}" class="row">
+                <img src="{{product.field_photo[0].filepath_thumb}}" class="img-thumbnail img-responsive" class=".col-sm-1" />
                 <h4>
                    {{product.title}} - {{product.sell_price | currency}}/unit <i ng-show="expanded[$index]" class="icon-minus-sign"></i> <i ng-hide="expanded[$index]" class="icon-plus-sign"></i>
                 </h4>
@@ -38,7 +38,7 @@
             <div class="accordion-body collapse" id="collapse{{$index}}">
               <div class="accordion-inner">
                 <div>
-                  <img src="{{url}}{{product.field_photo[0].filepath_normal}}" class="img-thumbnail img-responsive" />
+                  <img src="{{product.field_photo[0].filepath_normal}}" class="img-thumbnail img-responsive" />
                 </div>
                 <div ng-bind-html-unsafe="product.field_description[0].value"></div>
                 <form ng-submit="addCart({{product.nid}}, {{quantity}}, '{{product.title | escapestring}}', '{{product.sell_price}}')" class="form-inline">     
