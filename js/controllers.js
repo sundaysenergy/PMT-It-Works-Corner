@@ -41,6 +41,7 @@ function PmtProductList($scope, $http) {
 
   $scope.itemExpand = function(index) {
     $scope.attr_selected = true;
+    $scope.attributes.length = 0;
     var length = $scope.expanded.length;
     for (var i = 0; i < length; i++) {
       if (index != i) {
