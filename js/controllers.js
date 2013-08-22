@@ -83,6 +83,7 @@ function PmtProductList($scope, $http) {
     
     if ($scope.attributes.length < 2) {
       $scope.attr_selected = false;
+      $scope.attributes.length = 0;
       return false;
     }
 /*
