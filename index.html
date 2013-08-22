@@ -48,7 +48,7 @@
                 <div ng-bind-html-unsafe="product.field_description[0].value"></div>
                 <form ng-submit="addCart({{product.nid}}, {{quantity}}, '{{product.title | escapestring}}', '{{product.sell_price}}')" class="form-inline">     
                   <div ng-repeat="attribute in product.attributes">
-                    <select class="form-control" ng-options="p.name+' (+$'+p.price+')' for p in attribute.options" name="attribute-{{attribute.aid}}" ng-model="attributes[$index]" required>
+                    <select class="form-control" ng-options="p.name+' (+$'+p.price+')' for p in attribute.options" name="attribute-{{attribute.aid}}" ng-model="attributes[$index]" ng-change="clearAttr()">
                       <option value="">--{{attribute.name}}--</option>
                     </select>
 <!--
@@ -58,6 +58,9 @@
 -->
                   </div>
                   <input class="form-control" type="number" min="0" step="10" ng-model="quantity" placeholder="Enter Quantity"><br />
+                  <div class="alert alert-danger" ng-hide="attr_selected">
+                    Please select both a color and whether you would like it customized.
+                  </div>
                   <div class="alert alert-danger" ng-hide="multipleOften(quantity)">
                     Quantity must be a multiple of 10. 
                   </div>

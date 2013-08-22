@@ -17,6 +17,7 @@ function PmtProductList($scope, $http) {
 
   $scope.cart = [];
   $scope.attributes = [];
+  $scope.attr_selected = true;
   $scope.units = 0;
   $scope.dollars = 0.00;
   $scope.configuration = [];  
@@ -39,6 +40,7 @@ function PmtProductList($scope, $http) {
 */
 
   $scope.itemExpand = function(index) {
+    $scope.attr_selected = true;
     var length = $scope.expanded.length;
     for (var i = 0; i < length; i++) {
       if (index != i) {
@@ -60,6 +62,10 @@ function PmtProductList($scope, $http) {
     }
     return false;
   }
+
+  $scope.clearAttr = function() {
+    $scope.attr_selected = true;
+  }
   
   $scope.addCart = function(nid, quantity, title, price) {
     if ((quantity / 10) != parseInt(quantity / 10) || (parseInt(quantity) < 1)) {
@@ -73,6 +79,11 @@ function PmtProductList($scope, $http) {
       if (typeof($scope.attributes[i]) == 'undefined') {
         $scope.attributes.splice(i, 1);
       }
+    }
+    
+    if ($scope.attributes.length < 2) {
+      $scope.attr_selected = false;
+      return false;
     }
 /*
     if ($scope.attributes.length == 0) {
