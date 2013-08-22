@@ -76,7 +76,7 @@ function PmtProductList($scope, $http) {
     var length = $scope.attributes.length;
     
     for (var i = 0; i < length; i++) {
-      if (typeof($scope.attributes[i]) == 'undefined') {
+      if ((typeof($scope.attributes[i]) == 'undefined') || (($scope.attributes[i]) == null)) {
         $scope.attributes.splice(i, 1);
       }
     }
