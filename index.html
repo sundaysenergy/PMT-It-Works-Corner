@@ -74,6 +74,9 @@
                   <div class="alert alert-danger" ng-show="validDollars()">
                     {{ min_dollars | currency }} - {{ dollars | currency }} = {{ min_dollars - dollars | currency }} more needed to checkout
                   </div>
+                  <div class="alert alert-danger" ng-hide="units">
+                    Orders with customized products have a minimum unit total of {{ min_products }}, which can include any combination of the three products. Orders without customized products must total more than {{ min_dollars | currency }}, but have no minimum unit total.
+                  </div>
                   <input type="submit" class="btn btn-default" value="Add to cart">
                 </form>
               </div>
