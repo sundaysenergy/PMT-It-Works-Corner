@@ -8,7 +8,7 @@ filter('escapestring', function() {
 });
 
 function PmtProductList($scope, $http) {
-  $http.get('/service/it_works/json').success(function(data) {
+  $http.get('file.json').success(function(data) {
     $scope.products = data.products;
     $scope.min_products = data.min_qty;
     $scope.site_url = data.url;
@@ -56,6 +56,21 @@ function PmtProductList($scope, $http) {
     return true;
   }
 
+  $scope.validCustom = function() {
+    if ((true == $scope.contains_custom && $scope.units >= $scope.min_products) || 
+        (false == $scope.contains_custom)) {
+      return true;
+    }
+    return false;
+  }
+  
+  $scope.validDollars = function() {
+    if ((false == $scope.contains_custom) && ($scope.units > 0) && ($scope.dollars < $scope.min_dollars)) {
+      return true;
+    }  
+    return false;
+  }
+  
   $scope.validCheckout = function() {
     if ((true == $scope.contains_custom && $scope.units >= $scope.min_products) || 
         (false == $scope.contains_custom && $scope.min_dollars <= $scope.dollars)) {
