@@ -8,7 +8,7 @@ filter('escapestring', function() {
 });
 
 function PmtProductList($scope, $http) {
-  $http.get('file.json').success(function(data) {
+  $http.get('/service/it_works/json').success(function(data) {
     $scope.products = data.products;
     $scope.min_products = data.min_qty;
     $scope.site_url = data.url;
