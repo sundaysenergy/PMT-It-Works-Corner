@@ -134,7 +134,7 @@ function PmtProductList($scope, $http) {
     }
 */
     angular.copy($scope.attributes, attr);
-    $scope.units = $scope.units + quantity;
+    
     var attribute_length = attr.length;
     var is_custom = false;
     for (var j = 0; j < attribute_length; j++) {
@@ -144,6 +144,10 @@ function PmtProductList($scope, $http) {
           is_custom = true;
         }
       }
+    }
+    
+    if (is_custom) {
+      $scope.units = $scope.units + quantity;
     }
     $scope.cart.push({'adjusted_price': (parseFloat(price) + parseFloat(addons)), 'price': price, 'title': title, 'nid':nid, 'quantity': quantity, 'attributes': attr, 'custom': is_custom });
     $scope.dollars = $scope.totalCart();
@@ -180,12 +184,17 @@ function PmtProductList($scope, $http) {
       }
       dollars = parseFloat(dollars) + parseFloat(quantity * adjusted_price);
     }
+    if (parseInt(dollars) == 0) {
+      return 0;
+    }
     return dollars.toFixed(2);
   }
   
   $scope.removeItem = function(index, quantity) {
-    $scope.units = $scope.units - quantity;
-    $scope.cart.splice(index, 1);
+    var removed_item = $scope.cart.splice(index, 1);
+    if (removed_item[0].custom) {
+      $scope.units = $scope.units - quantity;    
+    }
     $scope.dollars = $scope.totalCart();
   }
 

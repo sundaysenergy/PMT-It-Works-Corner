@@ -74,7 +74,7 @@
                   <div class="alert alert-danger" ng-show="validDollars()">
                     {{ min_dollars | currency }} - {{ dollars | currency }} = {{ min_dollars - dollars | currency }} more needed to checkout
                   </div>
-                  <div class="alert alert-danger" ng-hide="units">
+                  <div class="alert alert-danger" ng-hide="dollars">
                     Orders with customized products have a minimum unit total of {{ min_products }}, which can include any combination of the three products. Orders without customized products must total more than {{ min_dollars | currency }}, but have no minimum unit total.
                   </div>
                   <input type="submit" class="btn btn-default" value="Add to cart">
@@ -106,8 +106,8 @@
             </form>
           </div>
         </div>
-        <h4>Total Units: <input ng-model="units" class="unit-total" readonly /></h4>
-        <h4>Total Price: $<input ng-model="dollars" class="unit-total" readonly /></h4>
+        <h4>Custom Units: <input ng-model="units" class="unit-total" readonly /></h4>
+        <h4>Total Order: $<input ng-model="dollars" class="unit-total" readonly /></h4>
         <div ng-hide="validCheckout()" class="alert alert-danger">
           Minimum order for standard tapes is $15, and the minimum quantity for custom printed tapes for It Works! distributors is <span>{{min_products}}</span> in any combination.
         </div>
